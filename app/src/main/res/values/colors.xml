@@ -3,9 +3,5 @@
    <color name = "darkBlue">#2c3e50</color>
    <color name = "lightBlue">#34495e</color>
    <color name = "white">#ecf0f1</color>
-    <color name = "backgrnd">#218ADB</color>
-
-
-
-
+   <color name = "backgrnd">#218ADB</color>
 </resources>

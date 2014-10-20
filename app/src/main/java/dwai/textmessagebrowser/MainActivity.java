@@ -1,36 +1,35 @@
 package dwai.textmessagebrowser;
 
-import android.app.Activity;
+import android.app.ActionBar;
 import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.telephony.SmsManager;
-import android.telephony.SmsMessage;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import us.feras.mdv.MarkdownView;
 
-
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
     private final String PHONE_NUMBER = "0018443343982";
     private final String ROOT_HTML_FILE_NAME = "root.html";
     public static FullTextMessage fullTextMessage;
@@ -62,9 +61,9 @@ public class MainActivity extends Activity {
                 " \n" +
                 "######Enter a valid url into the bar above. \n" +
                 " \n" +
-                "######Please note we're still in the early, beta, stages.\n" +
+                "######Please note we're still in the early beta stages.\n" +
                 " \n" +
-                "######There will be bugs, that's the entire reason for us releasing so early.\n" +
+                "######There will be bugs; that's the entire reason for us releasing so early.\n" +
                 " \n" +
                 "######Please report all bugs to bugs@cosmosbrowser.org\n" +
                 " \n" +
@@ -83,7 +82,7 @@ public class MainActivity extends Activity {
         //The following is for testing the getDecompressedMessages method..
 //        (MainActivity.webView).loadDataWithBaseURL("",fullTextMessage.getDecompressedMessages(),"text/html","UTF-8","");
 
-        final EditText urlEditText =  (EditText) findViewById(R.id.urlEditText);
+        final EditText urlEditText = (EditText) findViewById(R.id.urlEditText);
         urlEditText.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
@@ -113,11 +112,16 @@ public class MainActivity extends Activity {
                 return false;
             }
         });
-
-
-
-
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
     private void textToTwilio(String whatToSend) throws Exception{
         fullTextMessage.texts = new ArrayList<String>();
         String phone_Num = PHONE_NUMBER;
